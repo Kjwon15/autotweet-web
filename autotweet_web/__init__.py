@@ -3,6 +3,9 @@ import os
 from flask import Flask, g, jsonify, render_template, request
 from autotweet import database
 
+
+__version__ = '0.1.0'
+
 app = Flask(__name__)
 
 logger = logging.getLogger('web')

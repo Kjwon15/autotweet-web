@@ -1,5 +1,6 @@
 import os.path
 import sys
+from autotweet_web import __version__ as version
 
 try:
     from setuptools import find_packages, setup
@@ -27,6 +28,7 @@ if sys.version_info < (3, 2):
 
 setup(
     name='autotweet-web',
+    version=version,
     description='web instance for autotweet',
     long_description=readme(),
     url='http://kjwon15.net/',
