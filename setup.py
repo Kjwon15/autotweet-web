@@ -12,7 +12,7 @@ except ImportError:
 
 def readme():
     try:
-        with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
+        with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
             return f.read()
     except (IOError, OSError):
         return ''
