@@ -1,4 +1,5 @@
 import logging
+import os
 from flask import Flask, g, jsonify, render_template, request
 from autotweet import database
 
@@ -9,6 +10,8 @@ logger = logging.getLogger('web')
 
 @app.before_first_request
 def initialize():
+    app.config['DB_URI'] = app.config.get('DB_URI', None) or\
+        os.getenv('DATABASE_URL')
     database.init_db(app.config['DB_URI'])
 
     log_file = app.config.get('LOG_FILE', None)
