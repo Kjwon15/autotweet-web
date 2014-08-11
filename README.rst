@@ -12,3 +12,7 @@ Installation
    $ pip install autotweet-web
 
 
+Setup
+-----
+
+Please store your database url to `app.config['DB_URI']` or environment `$DATABASE_URL`
