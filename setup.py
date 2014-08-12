@@ -31,7 +31,7 @@ setup(
     version=version,
     description='web instance for autotweet',
     long_description=readme(),
-    url='http://kjwon15.net/',
+    url='https://github.com/Kjwon15/autotweet-web/',
     download_url='https://github.com/Kjwon15/autotweet-web/releases',
     author='Kjwon15',
     author_email='kjwonmail' '@' 'gmail.com',
