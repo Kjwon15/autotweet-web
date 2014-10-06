@@ -1,2 +1,2 @@
-autotweet>=0.1.0
+autotweet>=0.2.0
 flask>=0.10.1

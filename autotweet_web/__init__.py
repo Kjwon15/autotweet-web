@@ -12,7 +12,6 @@ logger = logging.getLogger('web')
 def initialize():
     app.config['DB_URI'] = app.config.get('DB_URI', None) or\
         os.getenv('DATABASE_URL')
-    database.init_db(app.config['DB_URI'])
 
     log_file = app.config.get('LOG_FILE', None)
     if log_file:
