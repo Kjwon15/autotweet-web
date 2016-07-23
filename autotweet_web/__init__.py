@@ -1,8 +1,7 @@
 import logging
 import os
 from flask import Flask, g, jsonify, render_template, request
-from autotweet import database
-
+from autotweet.learning import DataCollection
 
 __version__ = '0.1.0'
 
@@ -24,24 +23,19 @@ def initialize():
 
 @app.before_request
 def before_request():
-    g.db_session = database.get_session(app.config['DB_URI'])
-
-
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    g.db_session.remove()
+    g.db_session = DataCollection(app.config['DB_URI'])
 
 
 @app.route('/')
 def form():
-    count = database.get_count(g.db_session)
+    count = g.db_session.get_count()
     return render_template('form.html', count=count)
 
 
 @app.route('/query/')
 def result():
     query = request.args['query']
-    result = database.get_best_answer(g.db_session, query)
+    result = g.db_session.get_best_answer(query)
     if not result:
         r = jsonify()
         r.status_code = 404
@@ -63,7 +57,7 @@ def teach():
     answer = request.form['answer'].strip()
 
     if question and answer:
-        database.add_document(g.db_session, question, answer)
+        g.db_session.add_document(question, answer)
         return ''
 
     return ('', 400)
