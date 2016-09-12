@@ -20,22 +20,20 @@ def initialize():
         file_handler = logging.FileHandler(log_file)
         logger.addHandler(file_handler)
 
-
-@app.before_request
-def before_request():
-    g.db_session = DataCollection(app.config['DB_URI'])
+    global data_collection;
+    data_collection = DataCollection(app.config['DB_URI'])
 
 
 @app.route('/')
 def form():
-    count = g.db_session.get_count()
+    count = data_collection.get_count()
     return render_template('form.html', count=count)
 
 
 @app.route('/query/')
 def result():
     query = request.args['query']
-    result = g.db_session.get_best_answer(query)
+    result = data_collection.get_best_answer(query)
     if not result:
         r = jsonify()
         r.status_code = 404
@@ -57,7 +55,7 @@ def teach():
     answer = request.form['answer'].strip()
 
     if question and answer:
-        g.db_session.add_document(question, answer)
+        data_collection.add_document(question, answer)
         return ''
 
     return ('', 400)
